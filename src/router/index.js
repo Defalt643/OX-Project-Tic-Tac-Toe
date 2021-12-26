@@ -21,6 +21,11 @@ const routes = [
     name: 'MyPage',
     component: () => import('../views/MyPage.vue'),
     props: true
+  },
+  {
+    path: '/mygame',
+    name: 'MyGame',
+    component: () => import('../views/MyGame.vue')
   }
 ]
 
