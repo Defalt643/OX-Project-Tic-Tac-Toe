@@ -14,6 +14,7 @@
             :player="item"
             :row="lineId"
             :col="itemId"
+            :grade="gradeTable[lineId][itemId]"
             @cell-click="cellClick"
           />
         </td>
@@ -30,6 +31,11 @@ export default {
       count: 0,
       finish: false,
       winner: '-',
+      gradeTable: [
+        [false, false, false],
+        [false, false, false],
+        [false, false, false]
+      ],
       table: [
         ['-', '-', '-'],
         ['-', '-', '-'],
@@ -45,15 +51,15 @@ export default {
   },
   computed: {
     result () {
-      if (this.finish && this.winner === '-') {
-        return 'Draw'
-      } else {
-        return this.turn + ' Win!!!'
-      }
+      // if (this.finish && this.winner === '-') {
+      //   return 'Draw'
+      // } else {
+      //   return this.turn + ' Win!!!'
+      // }
 
-      // return this.finish && this.winner === '-'
-      //   ? 'Draw!!!'
-      //   : this.turn + ' Win!!!'
+      return this.finish && this.winner === '-'
+        ? 'Draw!!!'
+        : this.turn + ' Win!!!'
     }
   },
   methods: {
@@ -68,6 +74,7 @@ export default {
       for (let row = 0; row < 3; row++) {
         for (let col = 0; col < 3; col++) {
           this.table[row][col] = '-'
+          this.gradeTable[row][col] = false
         }
       }
     },
@@ -107,6 +114,9 @@ export default {
           return false
         }
       }
+      for (let col = 0; col < 3; col++) {
+        this.gradeTable[row][col] = true
+      }
       return true
     },
     checkCol (col) {
@@ -114,6 +124,9 @@ export default {
         if (this.table[row][col] !== this.turn) {
           return false
         }
+      }
+      for (let row = 0; row < 3; row++) {
+        this.gradeTable[row][col] = true
       }
       return true
     },
@@ -123,6 +136,9 @@ export default {
           return false
         }
       }
+      for (let index = 0; index < 3; index++) {
+        this.gradeTable[index][index] = true
+      }
       return true
     },
     checkX2 () {
@@ -130,6 +146,9 @@ export default {
         if (this.table[index][2 - index] !== this.turn) {
           return false
         }
+      }
+      for (let index = 0; index < 3; index++) {
+        this.gradeTable[index][2 - index] = true
       }
       return true
     },
@@ -146,4 +165,16 @@ export default {
   }
 }
 </script>
-<style></style>
+<style>
+table {
+  margin-left: auto;
+  margin-right: auto;
+  border: 1pt solid black;
+}
+td {
+  text-align: center;
+  vertical-align: middle;
+  width: 50pt;
+  height: 50pt;
+}
+</style>

@@ -1,9 +1,19 @@
 <template>
-  <div @click="clickCell">{{ player }}</div>
+  <div
+    @click="clickCell"
+    :class="{
+      cell: ture,
+      cellX: player === 'X',
+      cellO: player === 'O',
+      grade: grade
+    }"
+  >
+    {{ player }}
+  </div>
 </template>
 <script>
 export default {
-  props: ['player', 'row', 'col'],
+  props: ['player', 'row', 'col', 'grade'],
   methods: {
     clickCell (event) {
       // console.log(event)
@@ -14,4 +24,17 @@ export default {
   }
 }
 </script>
-<style></style>
+<style>
+.cell {
+  font-size: 30pt;
+}
+.cellX {
+  color: blue;
+}
+.cellO {
+  color: red;
+}
+.grade {
+  background-color: yellow;
+}
+</style>
