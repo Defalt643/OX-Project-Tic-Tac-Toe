@@ -1,5 +1,4 @@
 <template>
-  <div>MyGame</div>
   <OXTable />
 </template>
 <script>

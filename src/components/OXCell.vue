@@ -8,7 +8,7 @@ export default {
     clickCell (event) {
       // console.log(event)
       // console.log('click' + this.row + ' ' + this.col)
-      if(player !== '-') return
+      if (this.player !== '-') return
       this.$emit('cell-click', this.row, this.col)
     }
   }
